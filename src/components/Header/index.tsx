@@ -1,4 +1,5 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import logoImage from "@assets/logo.png";
 
@@ -9,10 +10,16 @@ type Props = {
 };
 
 const Header = ({ showBackButton = false }: Props): JSX.Element => {
+  const navigation = useNavigation();
+
+  const handleGoBack = useCallback(() => {
+    navigation.navigate("Groups");
+  }, [navigation]);
+
   return (
     <S.Container>
       {showBackButton && (
-        <S.BackButton>
+        <S.BackButton onPress={handleGoBack}>
           <S.BackIcon />
         </S.BackButton>
       )}
